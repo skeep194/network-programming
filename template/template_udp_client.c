@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     serv_adr.sin_addr.s_addr = inet_addr(argv[1]);
     serv_adr.sin_port = htons(atoi(argv[2]));
     // sendto, recvfrom
-    process(sock);
+    process(sock, serv_adr);
     // close socket
     close(sock);
     return 0;
