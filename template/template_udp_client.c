@@ -8,7 +8,7 @@
 #include <time.h>
 
 void error_handling(char *message);
-void process(int sock)
+void process(int sock, struct sockaddr_in serv_addr)
 {
 }
 
