@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
                     if(receiver == -1)
                     {
                         receiver = clnt_sock;
+                        FD_SET(clnt_sock, &reads);
                     }
                     else if(sender == -1)
                     {
@@ -82,12 +83,11 @@ int main(int argc, char *argv[])
                else if(i == sender)
                {
                     str_len = read(i, buf, BUF_SIZE);
-                    FD_CLR(i, &reads);
-                    FD_SET(receiver, &reads);
                     if(str_len == 0)
                     {
                         close(i);
                         printf("closed client: %d\n", i);
+                        FD_CLR(i, &reads);
                     }
                     else
                     {
@@ -98,12 +98,11 @@ int main(int argc, char *argv[])
                 else if(i == receiver)
                 {
                     str_len = read(i, buf, BUF_SIZE);
-                    FD_CLR(i, &reads);
-                    FD_SET(sender, &reads);
                     if(str_len == 0)
                     {
                         close(i);
                         printf("closed client: %d\n", i);
+                        FD_CLR(i, &reads);
                     }
                     else
                     {
